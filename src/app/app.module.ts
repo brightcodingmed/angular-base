@@ -11,11 +11,18 @@ import { CoursesComponent } from './courses/courses.component';
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { FlashMessagesModule } from 'angular2-flash-messages';
+import { RouterModule, Routes } from '@angular/router';
 
 import { ExtraitPipe } from './extrait.pipe';
 import { VoteComponent } from './vote/vote.component';
 import { TodosComponent } from './todos/todos.component';
 
+const routes: Routes = [
+  { path: "todos", component: TodosComponent },
+  { path: "courses", component: CoursesComponent },
+  { path: "blog", component: SiteComponent }
+]
 
 @NgModule({
   declarations: [
@@ -33,7 +40,9 @@ import { TodosComponent } from './todos/todos.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FlashMessagesModule.forRoot(),
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]

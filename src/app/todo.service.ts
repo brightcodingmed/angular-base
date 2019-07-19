@@ -11,4 +11,12 @@ export class TodoService {
   getAll() {
     return this.http.get('https://jsonplaceholder.typicode.com/todos');
   }
+
+  persist(todo) {
+    return this.http.post('https://jsonplaceholder.typicode.com/todos', todo)
+  }
+
+  delete(id) {
+    return this.http.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+  }
 }
