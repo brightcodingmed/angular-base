@@ -2,6 +2,10 @@
     color: greenyellow
 }
 
+.text-warning {
+   color: blue !important;
+}
+
 .echec {
     color: red
 }

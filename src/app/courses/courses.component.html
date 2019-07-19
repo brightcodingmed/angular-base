@@ -1,0 +1,50 @@
+<div class="text-right">
+    <button (click)="toggle()" class="btn btn-success btn-sm">
+        <i class="fa fa-plus"></i>
+    </button>
+</div>
+
+<div *ngIf="displayForm">
+   <input [(ngModel)]="myCourse.label" class="form-control" type="text" placeholder="Your course">
+<input [(ngModel)]="myCourse.price" class="form-control" type="text" placeholder="Your price">
+<textarea placeholder="Your description" [(ngModel)]="myCourse.description" class="form-control" rows="10"></textarea>
+<input type="checkbox" [(ngModel)]="myCourse.status"> Status
+<button *ngIf="editable" (click)="updateCourse()" class="btn btn-warning btn-block">Update Course</button>
+<button *ngIf="!editable" (click)="addCourse()" class="btn btn-success btn-block">Add new Course</button> 
+</div>
+
+<ul class="list-group mt-3">
+    <li (dblclick)="deleteCourse(course.id)" class="list-group-item" *ngFor="let course of courses; index as i">
+
+        <img [src]="course.image" alt="">
+
+        <i [class.text-warning]="!course.status"  (click)="changeStatus(course)" class="fa fa-power-off"></i> 
+        <span 
+        [ngStyle]="{
+            fontSize: course.status ? '26px' : '12px',
+            backgroundColor: course.status ? 'purple': 'yellow'
+        }"  
+        class="badge" 
+        [ngClass]="{
+            'text-warning': course.status,
+            'echec': !course.status
+        }">{{ course.status }}</span> 
+        {{ course.label | titlecase | resume:3 | lowercase }} - Price: {{ course.price | currency:'EUR':'symbol':'1.2-3' }} - Published : {{ course.publishedDate | date: 'dd/MM/yyyy' }}
+        <p>{{ course.description | resume:'10' }}</p>
+
+         <div>
+             {{ course.vote | json }}
+           <app-vote 
+              [my-like]="course.vote.like" 
+              [my-dislike]="course.vote.disLike"
+              (onVote)="receiveVote($event, course)"
+              >
+           </app-vote>
+        </div>
+
+        <div class="text-right">
+            <button (click)="editCourse(course, i)" class="btn btn-warning btn-sm mr-1"><i class="fa fa-pencil"></i></button>
+            <button (click)="deleteCourse(course.id)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+        </div>
+    </li>
+</ul>
