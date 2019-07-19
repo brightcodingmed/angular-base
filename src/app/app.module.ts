@@ -10,8 +10,12 @@ import { FormComponent } from './form/form.component';
 import { CoursesComponent } from './courses/courses.component';
 
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
 import { ExtraitPipe } from './extrait.pipe';
 import { VoteComponent } from './vote/vote.component';
+import { TodosComponent } from './todos/todos.component';
+
 
 @NgModule({
   declarations: [
@@ -23,11 +27,13 @@ import { VoteComponent } from './vote/vote.component';
     FormComponent,
     CoursesComponent,
     ExtraitPipe,
-    VoteComponent
+    VoteComponent,
+    TodosComponent
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
